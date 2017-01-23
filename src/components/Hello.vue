@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
+    <h1>{{ tag }}</h1>
     <h2>Essential Links</h2>
     <h2>{{items}}</h2>
     <ul>
@@ -25,7 +25,7 @@
 export default {
   name: 'hello',
 
-  created() {
+  beforeCreate() {
     this.$store.dispatch('use', 'database')
     this.$store.dispatch('select', 'table')
     // this.$store.dispatch('select', 'database', 'table')
@@ -33,10 +33,13 @@ export default {
 
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App',
-      tag: this.$store.state.tag,
-      items: this.$store.getters.items
+      msg: 'Welcome to Your Vue.js App'
     }
+  },
+
+  computed: {
+    items() { return this.$store.state.items },
+    tag() { return this.$store.state.tag }
   }
 }
 </script>
