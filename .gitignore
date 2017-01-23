@@ -1,0 +1,5 @@
+.DS_Store
+src/secretConfig.js
+node_modules/
+dist/
+npm-debug.log
