@@ -22,24 +22,43 @@
 </template>
 
 <script>
+import Firebase from './store/firebase'
+
 export default {
   name: 'hello',
 
   beforeCreate() {
-    this.$store.dispatch('use', 'database')
-    this.$store.dispatch('select', 'table')
-    // this.$store.dispatch('select', 'database', 'table')
+    // this.$store.dispatch('use', 'database')
+    // this.$store.dispatch('select', 'table')
+  },
+
+  created() {
+    Firebase.setListeners('LIST', [this.updateItems.bind(this)])
+    // Firebase.addListener('LIST', this.updateItems)
+    Firebase.select('table', 'database')
+  },
+
+  beforeDestroy() {
+    Firebase.removeListener('LIST', this.updateItems)
   },
 
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Welcome to Your Vue.js App',
+      items: ['test']
     }
   },
 
   computed: {
-    items() { return this.$store.state.items },
+    // items() { return this.$store.state.items },
     tag() { return this.$store.state.tag }
+  },
+
+  methods: {
+    updateItems({data}) {
+      this.items = data
+      // console.log('updateItems:', data)
+    }
   }
 }
 </script>
