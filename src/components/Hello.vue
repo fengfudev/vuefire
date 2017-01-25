@@ -33,13 +33,14 @@ export default {
   },
 
   created() {
-    Firebase.setListeners('LIST', [this.updateItems.bind(this)])
-    // Firebase.addListener('LIST', this.updateItems)
+    this.listListener = this.updateItems.bind(this)
+    Firebase.setListeners('LIST', [this.listListener])
+    // Firebase.addListener('LIST', this.listListener)
     Firebase.select('table', 'database')
   },
 
   beforeDestroy() {
-    Firebase.removeListener('LIST', this.updateItems)
+    Firebase.removeListener('LIST', this.listListener)
   },
 
   data () {

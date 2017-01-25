@@ -51,7 +51,7 @@ let Firebase = {
     if (!eventListeners[event]) eventListeners[event] = []
     let index = eventListeners[event].indexOf(func)
     if (index < 0 && func && typeof func === 'function') eventListeners[event].push(func)
-    // console.log('add listener:', eventListeners[event])
+    console.log('add listener:', eventListeners[event])
   },
 
   removeListener(event, func) {
@@ -62,6 +62,7 @@ let Firebase = {
 
   setListeners(event, listeners = []) {
     eventListeners[event] = listeners
+    console.log('set listener:', eventListeners[event])
   },
 
   runListeners(event, data) {

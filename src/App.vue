@@ -1,17 +1,25 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <hello></hello>
+    <Site-Menu></Site-Menu>
+    <Site-Header></Site-Header>
+
+    <router-view></router-view>
+    
+    <Site-Footer></Site-Footer>
   </div>
 </template>
 
 <script>
-import Hello from './components/Hello'
+import SiteMenu from './components/layout/Menu'
+import SiteHeader from './components/layout/Header'
+import SiteFooter from './components/layout/Footer'
 
 export default {
   name: 'app',
   components: {
-    Hello
+    SiteMenu,
+    SiteHeader,
+    SiteFooter
   }
 }
 </script>
