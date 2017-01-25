@@ -1,10 +1,12 @@
 <template>
-  <div class="todo">
+  <Region class="todo">
     <h1>Todo</h1>
-  </div>
+  </Region>
 </template>
 
 <script>
+  import Region from '../ui/Region'
+
   export default {
     name: "todo",
     
@@ -12,6 +14,10 @@
       return {
 
       }
+    },
+
+    components: {
+      Region
     },
 
     methods: {

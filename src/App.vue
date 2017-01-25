@@ -1,10 +1,12 @@
 <template>
   <div id="app">
     <Site-Menu></Site-Menu>
-    <Site-Header></Site-Header>
+    <!--<Site-Header></Site-Header>-->
 
-    <router-view></router-view>
-    
+    <div class="main">
+      <router-view></router-view>
+    </div>
+
     <Site-Footer></Site-Footer>
   </div>
 </template>
@@ -26,11 +28,13 @@ export default {
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  /*font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  -moz-osx-font-smoothing: grayscale;*/
+  margin-top: 54px;
+  /*padding-top: 4rem;*/
+}
+.main {
+  min-height: 300px;
 }
 </style>

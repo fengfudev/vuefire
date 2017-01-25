@@ -1,10 +1,12 @@
 <template>
-  <div class="note">
+  <Region class="note">
     <h1>Note</h1>
-  </div>
+  </Region>
 </template>
 
 <script>
+  import Region from '../ui/Region'
+  
   export default {
     name: "note",
     
@@ -12,6 +14,10 @@
       return {
 
       }
+    },
+
+    components: {
+      Region
     },
 
     methods: {
