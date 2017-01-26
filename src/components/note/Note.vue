@@ -20,7 +20,7 @@
     },
 
     firebase: {
-      notes: fireStore.noteRef
+      notes: fireStore.notes
     },
 
     components: {

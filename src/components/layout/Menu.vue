@@ -1,30 +1,6 @@
-<!--<template>
-  <div class="menu">
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">{{siteName}}</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li :class="{active: $route.path === '/'}"><router-link to="/">Home</router-link></li>
-            <li :class="{active: $route.path === '/todo'}"><router-link to="/todo">Todo</router-link></li>
-            <li :class="{active: $route.path === '/note'}"><router-link to="/note">Note</router-link></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-  </div>
-</template>-->
-
 <template>
-    <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse fixed-top">      
+  <div>
+      <nav class="navbar navbar-toggleable-md fixed-top navbar-inverse bg-inverse">
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -41,35 +17,68 @@
           <li class="nav-item" :class="{active: $route.path === '/note'}">
             <router-link class="nav-link" to="/note">Note</router-link>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-            <div class="dropdown-menu" aria-labelledby="dropdown01">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
+        </ul>
+        <ul class="navbar-nav navbar-right">
+          <li class="nav-item dropdown" v-if="user">
+            <router-link class="nav-link dropdown-toggle" to="#" id="auth-user" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hello, {{userName}}</router-link>
+            <div class="dropdown-menu" aria-labelledby="auth-user">
+              <router-link class="dropdown-item" to="/profile">Profile</router-link>
+              <a class="dropdown-item" href="/logout" @click="logout">Logout</a>
             </div>
           </li>
+          <li class="nav-item" v-else>
+            <a class="nav-link" href="#" @click="login">login</a>
+            <!--<router-link class="nav-link" to="/login">login</router-link>-->
+          </li>          
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form> 
       </div>
-    </nav>  
+    </nav>
+  
+  </div>       
 </template>
 
 <script>
   export default {
     name: "menu",
     
+    mounted() {
+    },
+
     data() {
       return {
         siteName: 'VueFire',
-        selectedItem: 'todo'
+        selectedItem: ''
+      }
+    },
+
+    computed: {
+      user() {
+        return this.$store.state.authUser
+      },
+
+      userName: function() {
+        if (this.user) {
+          return this.user.displayName ? this.user.displayName : this.user.email.split('@')[0];
+        }
+        return 'not logged on'
       }
     },
 
     methods: {
+      logout() {
+        fireStore.auth.signOut().then( () => this.$router.push('/') )
+      },
+      
+      login() {
+        fireStore.auth.signInWithEmailAndPassword('user@example.com', 'password')
+        .catch((err) => {
+          console.log(err)
+        })
+        .then( (data) => {
+          this.$router.push('/')
+          console.log(data)
+        })
+      }
     }
 
   }  

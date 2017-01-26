@@ -20,7 +20,7 @@
     },
 
     firebase: {
-      todos: fireStore.todoRef
+      todos: fireStore.todos
     },
 
     components: {
