@@ -1,5 +1,5 @@
 <template>
-  <div class="region clearFix" :style="style">
+  <div class="region clearfix" :style="style">
       <div class="container" v-if="container">
         <slot></slot>
       </div>
@@ -37,9 +37,6 @@
   }  
 </script>
 
-<style>
-  .region {
-    padding: 0;
-    margin: 0;
-  }
+<style scoped>
+
 </style>

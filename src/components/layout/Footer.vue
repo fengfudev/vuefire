@@ -26,15 +26,11 @@
   }  
 </script>
 
-<style>
+<style scoped>
   .float-right {
     float: right;
   }
-  .float-left {
-    float: left;
-  } 
-  footer {
-    background: #CCC;
-    padding-top: 10px;
+  .container {
+    padding: 0;
   }
 </style>

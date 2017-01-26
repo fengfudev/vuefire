@@ -1,15 +1,18 @@
 <template>
   <div class="home">
-    <Region background="cyan">
+    <Region :background="color1" :color="color4">
       <h1>Home</h1>
     </Region>
-    <Region background="#CCC">
+    <Region :background="color2" :color="dark">
       <p style="padding: 10px">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur sapiente ipsum suscipit quod quam, unde, sit a neque voluptatum incidunt sint, maiores vero eaque laudantium! Veritatis molestias nulla repellendus et!</p>
     </Region>
-    <Region background="red">
+    <Region :background="color3" :color="color4">
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur sapiente ipsum suscipit quod quam, unde, sit a neque voluptatum incidunt sint, maiores vero eaque laudantium! Veritatis molestias nulla repellendus et!</p>
     </Region>
-    <Region background="blue">
+    <Region :background="color4" :color="light">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur sapiente ipsum suscipit quod quam, unde, sit a neque voluptatum incidunt sint, maiores vero eaque laudantium! Veritatis molestias nulla repellendus et!</p>
+    </Region>
+    <Region :background="color5">
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur sapiente ipsum suscipit quod quam, unde, sit a neque voluptatum incidunt sint, maiores vero eaque laudantium! Veritatis molestias nulla repellendus et!</p>
     </Region>
   </div>
@@ -17,13 +20,14 @@
 
 <script>
   import Region from '../ui/Region'
+  import Config from '../../config'
 
   export default {
     name: "home",
 
     data() {
       return {
-
+        ...Config.color,
       }
     },
 

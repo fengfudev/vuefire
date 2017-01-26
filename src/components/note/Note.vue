@@ -1,6 +1,9 @@
 <template>
   <Region class="note">
     <h1>Note</h1>
+    <ul>
+      <li v-for="note in notes">{{ note.text }}</li>
+    </ul>
   </Region>
 </template>
 
@@ -16,6 +19,10 @@
       }
     },
 
+    firebase: {
+      notes: fireStore.noteRef
+    },
+
     components: {
       Region
     },
@@ -27,6 +34,6 @@
   }  
 </script>
 
-<style>
+<style scoped>
   
 </style>

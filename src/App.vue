@@ -12,12 +12,17 @@
 </template>
 
 <script>
+
 import SiteMenu from './components/layout/Menu'
 import SiteHeader from './components/layout/Header'
 import SiteFooter from './components/layout/Footer'
 
 export default {
   name: 'app',
+  data() {
+    return {
+    }
+  },  
   components: {
     SiteMenu,
     SiteHeader,

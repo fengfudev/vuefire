@@ -1,48 +1,22 @@
 
 import Vue from 'vue'
-import Vuex from 'vuex'
-import Firebase from './firebase'
+import Firebase from 'firebase'
+import VueFire from 'vuefire'
+import secretConfig from "../../secretConfig.js"
 
-Vue.use(Vuex)
+Vue.use(VueFire)
 
-let listListener = ({data, table, db}) => { store.commit('setItems', data) }
-let debugListener = ({data, table, db}) => { console.log('debug:', data, table, db) }
-// Firebase.addListener('LIST', listListener);
-// Firebase.addListener('LIST', debugListener);
+let fireApp = Firebase.initializeApp(secretConfig.firebase)
+let fireDb = fireApp.database()
+let baseRef = 'demo/'
 
+let todoRef = fireDb.ref(baseRef + 'todo')
+let noteRef = fireDb.ref(baseRef + 'note')
 
-const state = {
-  tag: 'Learning vue, vuex and firebase',
-  items: []
+export default window.fireStore = {
+  fireApp,
+  fireDb,
+  baseRef,
+  todoRef,
+  noteRef,
 }
-
-const getters = {
-
-}
-
-const mutations = {
-  setItems(state, items) {
-    state.items = items
-  }
-}
-
-const actions = {
-  use({commit}, dbName) {
-    Firebase.use(dbName)
-  },
-
-  select({commit}, tableName) {
-    Firebase.select(tableName, null, function(items) {
-      // commit('setItems', items)
-    })
-  }
-}
-
-let store = new Vuex.Store({
-  state,
-  getters,
-  mutations,
-  actions
-})
-
-export default store
