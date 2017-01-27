@@ -20,16 +20,22 @@
         </ul>
         <ul class="navbar-nav navbar-right">
           <li class="nav-item dropdown" v-if="user">
-            <router-link class="nav-link dropdown-toggle" to="#" id="auth-user" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hello, {{userName}}</router-link>
+            <a class="nav-link dropdown-toggle" href="#" id="auth-user" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hello, {{userName}}</a>
             <div class="dropdown-menu" aria-labelledby="auth-user">
               <router-link class="dropdown-item" to="/profile">Profile</router-link>
-              <a class="dropdown-item" href="/logout" @click="logout">Logout</a>
+              <a class="dropdown-item" href="/signout" @click="signout">Sign out</a>
             </div>
           </li>
-          <li class="nav-item" v-else>
-            <a class="nav-link" href="#" @click="login">login</a>
-            <!--<router-link class="nav-link" to="/login">login</router-link>-->
-          </li>          
+          <template v-if="!user">
+            <li class="nav-item">
+              <!--<a class="nav-link" href="#" @click="signin">Sign in</a>-->
+              <router-link class="nav-link" to="/signin">Sign in</router-link>
+            </li> 
+            <span class="navbar-text">/</span>        
+            <li class="nav-item">
+              <router-link class="nav-link" to="/signup">Sign up</router-link>
+            </li>          
+          </template>
         </ul>
       </div>
     </nav>
@@ -65,11 +71,11 @@
     },
 
     methods: {
-      logout() {
+      signout() {
         fireStore.auth.signOut().then( () => this.$router.push('/') )
       },
       
-      login() {
+      signin() {
         fireStore.auth.signInWithEmailAndPassword('user@example.com', 'password')
         .catch((err) => {
           console.log(err)

@@ -1,13 +1,13 @@
 
 import Vue from 'vue'
-import Firebase from 'firebase'
+import firebase from 'firebase'
 import VueFire from 'vuefire'
 import secretConfig from "../../secretConfig.js" 
 import store from './appStore'
 
 Vue.use(VueFire)
 
-let app = Firebase.initializeApp(secretConfig.firebase)
+let app = firebase.initializeApp(secretConfig.firebase)
 let db = app.database()
 let auth = app.auth()
 let baseRef = 'demo/'
@@ -23,6 +23,7 @@ auth.onAuthStateChanged( user => {
 })
 
 export default window.fireStore = {
+  firebase,
   app,
   db,
   auth,
