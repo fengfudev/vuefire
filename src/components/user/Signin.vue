@@ -26,7 +26,7 @@
               </div>
             </div>
 
-            <hr class="hr-text" data-content="OR">
+            <LineBreakText text="OR"></LineBreakText>
 
             <div class="alert alert-danger" role="alert" v-if="errorMessage">
               <strong>Oh snap!</strong> {{errorMessage}}
@@ -56,9 +56,11 @@
 </template>
 
 <script>
+  import LineBreakText from '../ui/LineBreakText'
   export default {
     name: "signin",
 
+    components: {LineBreakText},
     data() {
       return {
         email: '',

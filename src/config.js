@@ -8,5 +8,13 @@ export default {
     color3: '#D5DED9',
     color4: '#7A6A53',
     color5: '#99B2B7',
+  },
+
+  breakpoints: {
+    xl: 1200,
+    lg: 992,
+    md: 768,
+    sm: 576,
+    xs: 0
   }
 }

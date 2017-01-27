@@ -1,6 +1,6 @@
 <template>
-  <div>
-      <nav class="navbar navbar-toggleable-md fixed-top navbar-inverse bg-inverse">
+  <div id="site-menu">
+      <nav id="site-navbar" class="navbar navbar-toggleable-md fixed-top navbar-inverse bg-inverse">
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -23,17 +23,17 @@
             <a class="nav-link dropdown-toggle" href="#" id="auth-user" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hello, {{userName}}</a>
             <div class="dropdown-menu" aria-labelledby="auth-user">
               <router-link class="dropdown-item" to="/profile">Profile</router-link>
-              <a class="dropdown-item" href="/signout" @click="signout">Sign out</a>
+              <a class="dropdown-item" href="/signout" @click.prevent="signout">Sign out</a>
             </div>
           </li>
           <template v-if="!user">
             <li class="nav-item">
-              <!--<a class="nav-link" href="#" @click="signin">Sign in</a>-->
               <router-link class="nav-link" to="/signin">Sign in</router-link>
             </li> 
-            <span class="navbar-text">/</span>        
             <li class="nav-item">
-              <router-link class="nav-link" to="/signup">Sign up</router-link>
+              <form class="form-inline my-2 my-lg-0">
+                <router-link class="signup-btn btn btn-outline-secondary my-2 my-sm-0" to="/signup">Sign up</router-link>
+              </form>
             </li>          
           </template>
         </ul>
@@ -72,7 +72,10 @@
 
     methods: {
       signout() {
-        fireStore.auth.signOut().then( () => this.$router.push('/') )
+        fireStore.auth.signOut().then( () => {
+          // console.log(this.$router)
+          this.$router.push('/') 
+        })
       },
       
       signin() {
@@ -91,5 +94,9 @@
 </script>
 
 <style scoped>
+
+.signup-btn {
+  color: white;
+}
   
 </style>

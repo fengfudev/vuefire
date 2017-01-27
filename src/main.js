@@ -5,6 +5,7 @@ import Vue from 'vue'
 import store from 'components/store/appStore'
 import fireStore from 'components/store/fireStore'
 import router from './router'
+require( './initialize' )
 
 import App from './App'
 

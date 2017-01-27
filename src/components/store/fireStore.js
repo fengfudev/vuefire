@@ -18,7 +18,7 @@ let notes = db.ref(baseRef + 'note')
 
 auth.onAuthStateChanged( user => {
   window.authUser = user
-  store.dispatch('setAuthUser', user)
+  store.commit('setAuthUser', user)
   console.log('Auth changed', user)
 })
 
