@@ -2,7 +2,7 @@ let _ = require('lodash')
 import store from 'components/store/appStore'
 import Config from './config'
 
-window.addEventListener('resize', _.debounce(handleResize, 300))
+window.addEventListener('resize', _.debounce(handleResize, 200))
 window.addEventListener('load', handleResize)
 
 function handleResize(e) {

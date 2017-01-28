@@ -15,6 +15,17 @@ let baseRef = 'demo/'
 let todos = db.ref(baseRef + 'todo')
 let notes = db.ref(baseRef + 'note')
 
+let todoApp = {
+  create(title, description, dueDate) {
+    return todos.push({
+      title,
+      description,
+      dueAt: dueDate ? new Date(dueDate).getTime() : null,
+      createdAt: new Date().getTime(),
+      finished: false
+    });
+  }
+}
 
 auth.onAuthStateChanged( user => {
   window.authUser = user
@@ -30,4 +41,5 @@ export default window.fireStore = {
   baseRef,
   todos,
   notes,
+  todoApp,
 }

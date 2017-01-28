@@ -11,10 +11,10 @@
           <li class="nav-item" :class="{active: $route.path === '/'}">
             <router-link class="nav-link" to="/">Home</router-link>
           </li>
-          <li class="nav-item" :class="{active: $route.path === '/todo'}">
+          <li class="nav-item" :class="{active: $route.path.startsWith('/todo')}">
             <router-link class="nav-link" to="/todo">Todo</router-link>
           </li>
-          <li class="nav-item" :class="{active: $route.path === '/note'}">
+          <li class="nav-item" :class="{active: $route.path.startsWith('/note')}">
             <router-link class="nav-link" to="/note">Note</router-link>
           </li>
         </ul>

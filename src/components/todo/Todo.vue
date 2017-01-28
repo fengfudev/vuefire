@@ -1,16 +1,33 @@
 <template>
-  <div class="todo container">
+  <div class="todo" :class="{container: breakpointUp('md')}">
     <div class="row" style="{overflow: hidden;}">
-      <div class="col-3">
-        <sidebar-box :background="color1"></sidebar-box>
+
+      <div class="col-sm-3" v-if="breakpointUp('sm')">
+        <sidebar-box :background="color1">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <router-link class="nav-link" to="/todo">Todos</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link" to="/todo/create">Create</router-link>
+            </li>
+          </ul>
+        </sidebar-box>
       </div>
-      <div class="col-9">
-        <h1>Todo</h1>
-        {{innerWidth}} / {{innerHeight}} / {{breakpoint}} / {{ breakpointUp('md')}} <br>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam explicabo earum incidunt quam magni architecto sint rem aliquid? Quis, reprehenderit. At asperiores dolorem ipsam sunt debitis, quibusdam molestias nemo, doloremque?
-        <ul>
-          <li v-for="todo in todos">{{ todo.text }}</li>
+
+      <div v-if="!breakpointUp('sm')">
+        <ul class="nav">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Todos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Create</a>
+          </li>
         </ul>
+      </div>
+
+      <div class="col-sm-9">
+        <router-view></router-view>
       </div>
     </div>
   </div>
