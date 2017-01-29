@@ -62,7 +62,7 @@
             <div class="card-header">
               <h5>{{todo.title}}</h5>
             </div>
-            <div class="card-block">
+            <div class="card-block" :class="{finished: todo.finished, waiting: !todo.finished}">
               <p class="card-text">{{todo.description}}</p>
             </div>
             <div class="card-footer text-center">
@@ -93,6 +93,12 @@
 <script>
   import datePicker from 'vue-datepicker'
 
+  let map = {
+    todosFinished: fireStore.todos.orderByChild('finished').equalTo(true).limitToLast(100),
+    todosWaiting: fireStore.todos.orderByChild('finished').equalTo(false).limitToLast(100),
+    default: fireStore.todos.limitToLast(100)
+  }
+
   export default {
     data() {
       return {
@@ -111,32 +117,16 @@
     },
 
     computed: {
-      // todos() {
-      //   let query;
-      //   console.log(this.$route.query.todoRef)
-      //   if (this.$route.query.todoRef === 'todosFinished') {
-      //     query = fireStore.todos.orderByChild('finished').equalTo(true).limitToLast(100)
-      //   } else if (this.$route.query.todoRef === 'todosWaiting') {
-      //     query = fireStore.todos.orderByChild('finished').equalTo(false).limitToLast(100)
-      //   } else {
-      //     query = fireStore.todos.limitToLast(100)
-      //   }
-        
-      //   try {
-      //     this.$unbind('_todos')
-      //   }
-      //   catch (e){
-      //   }
-      //   finally {
-      //     this.$bindAsArray('_todos', query)
-      //   }
-      //   return this._todos
-      // }
       todos() {
-        if (this.$route.query.todoRef === 'todosFinished') return this.todosFinished
-        if (this.$route.query.todoRef === 'todosWaiting') return this.todosWaiting
-        return this.todosAll
+        let query;
+        query = map[this.$route.query.todoRef] || map.default
+        return this.bindTodo(query)        
       }
+      // todos() {
+      //   if (this.$route.query.todoRef === 'todosFinished') return this.todosFinished
+      //   if (this.$route.query.todoRef === 'todosWaiting') return this.todosWaiting
+      //   return this.todosAll
+      // }
     },
 
     components: {
@@ -146,15 +136,27 @@
     props: ['todoRef'],
 
     firebase: {
-      todosAll: fireStore.todos.limitToLast(100),
-      todosFinished: fireStore.todos.orderByChild('finished').equalTo(true).limitToLast(100),
-      todosWaiting: fireStore.todos.orderByChild('finished').equalTo(false).limitToLast(100)
+      // todosAll: fireStore.todos.limitToLast(100),
+      // todosFinished: fireStore.todos.orderByChild('finished').equalTo(true).limitToLast(100),
+      // todosWaiting: fireStore.todos.orderByChild('finished').equalTo(false).limitToLast(100)
     },
 
     methods: {
       needFix(index) {
         return false
         // return (index % 3) == 2
+      },
+
+      bindTodo(query) {
+        try {
+          this.$unbind('_todos')
+        }
+        catch (e){
+        }
+        finally {
+          this.$bindAsArray('_todos', query)
+        }
+        return this._todos
       },
 
       mark(todo) {
@@ -197,6 +199,11 @@
   margin-right: 2px;
 }
 
+.card-header {
+  background-color: #6b7886;
+  color: white;
+}
+
 .card-footer {
   font-size: 0.5 rem;
 }
@@ -208,6 +215,14 @@
 .todo {
   margin: 10px auto;
   overflow: hidden;
+}
+
+.finished {
+  background-color: #D9CEB2;
+}
+
+.waiting {
+  background-color: #D5DED9;
 }
 
 .gutters {

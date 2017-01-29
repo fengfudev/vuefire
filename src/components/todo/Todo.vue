@@ -82,7 +82,7 @@
   }  
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 
 .main-area {
   background: #aaa;
@@ -93,11 +93,11 @@
 .no-gap {
   margin-right: 0;
   margin-left: 0;
+  & > [class*="col-"] {
+    padding-right: 0;
+    padding-left: 0;
+  }
 }
 
-.no-gap > [class*="col-"] {
-  padding-right: 0;
-  padding-left: 0;
-}
   
 </style>

@@ -93,8 +93,13 @@
   }  
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 
+@import '~styles/global';
+
+#site-navbar {
+  background-color: $color4 !important;
+}
 .signup-btn {
   color: white;
 }

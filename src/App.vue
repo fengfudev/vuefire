@@ -36,7 +36,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 
 body {
   /*font-family: 'Libre Baskerville', serif;*/
@@ -56,16 +56,5 @@ h1, h2, h3, h4, h5, h6 {
 .full-width {
   width: 100%;
 }
-
-/*.no-gutters {
-  margin-right: 0;
-  margin-left: 0;
-}
-
-.no-gutters > [class*="col-"] {
-  padding-right: 0;
-  padding-left: 0;
-}*/
-
 
 </style>
