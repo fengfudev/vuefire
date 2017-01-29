@@ -1,6 +1,6 @@
 <template>
   <div class="todo" :class="{container: breakpointUp('md')}">
-    <div class="row" style="{overflow: hidden;}">
+    <div class="row no-gap" style="{overflow: hidden;}">
 
       <div class="col-sm-3" v-if="breakpointUp('sm')">
         <sidebar-box :background="color1">
@@ -10,6 +10,12 @@
             </li>
             <li class="nav-item">
               <router-link class="nav-link" to="/todo/create">Create</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link" to="/todo?todoRef=todosFinished">Finished</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link" to="/todo?todoRef=todosWaiting">Waiting</router-link>
             </li>
           </ul>
         </sidebar-box>
@@ -26,7 +32,7 @@
         </ul>
       </div>
 
-      <div class="col-sm-9">
+      <div class="col-sm-9 main-area" :style="{'background-color': color2}">
         <router-view></router-view>
       </div>
     </div>
@@ -45,7 +51,8 @@
 
     data() {
       return {
-        ...Config.color
+        ...Config.color,
+        allRef: fireStore.todos.limitToLast(100)
       }
     },
     
@@ -76,5 +83,21 @@
 </script>
 
 <style scoped>
+
+.main-area {
+  background: #aaa;
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+}
+  
+.no-gap {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.no-gap > [class*="col-"] {
+  padding-right: 0;
+  padding-left: 0;
+}
   
 </style>

@@ -29,7 +29,7 @@
               <div class="form-group row">
                 <label for="dueDate" class="col-sm-3 col-form-label">Due date</label>
                 <div class="col-sm-9">
-                  <input v-model="dueDate" required type="date" class="form-control" id="dueDate" placeholder="">
+                  <input v-model="dueDate" type="date" class="form-control" id="dueDate" placeholder="">
                 </div>
               </div>
 

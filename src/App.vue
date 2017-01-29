@@ -37,15 +37,35 @@ export default {
 </script>
 
 <style>
-#vue-fire {
-  /*font-family: 'Avenir', Helvetica, Arial, sans-serif;
+
+body {
+  /*font-family: 'Libre Baskerville', serif;*/
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;*/
+  -moz-osx-font-smoothing: grayscale;
+}
+#vue-fire {
+  /*font-family: 'Avenir', Helvetica, Arial, sans-serif;*/
   padding-top: 54px;
   /*padding-top: 4rem;*/
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Roboto', sans-serif;
 }
 
 .full-width {
   width: 100%;
 }
+
+/*.no-gutters {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.no-gutters > [class*="col-"] {
+  padding-right: 0;
+  padding-left: 0;
+}*/
+
+
 </style>
